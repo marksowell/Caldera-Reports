@@ -1,10 +1,22 @@
 import json
+import sys
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
-# Load JSON data from the file
-with open('/mnt/data/test_report.json', 'r') as file:
-    data = json.load(file)
+# Check if a file path is provided as a command-line argument
+if len(sys.argv) < 2:
+    print("Usage: python generate_report.py <path_to_json_file>")
+    sys.exit(1)
+
+json_file_path = sys.argv[1]
+
+# Load JSON data from the provided file path
+try:
+    with open(json_file_path, 'r') as file:
+        data = json.load(file)
+except Exception as e:
+    print(f"Failed to load JSON file: {e}")
+    sys.exit(1)
 
 # Create a PDF report
 c = canvas.Canvas("caldera_report.pdf", pagesize=letter)
