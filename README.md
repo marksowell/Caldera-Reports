@@ -1,4 +1,4 @@
-# Caldera Reports Generator
+# Caldera Report Generator
 
 This Python script allows users to convert JSON reports downloaded from Caldera into readable, formatted PDF documents. The script uses the ReportLab library to generate the reports.
 
