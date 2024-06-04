@@ -2,6 +2,7 @@ import json
 import sys
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from datetime import datetime
 
 # Check if a file path is provided as a command-line argument
 if len(sys.argv) < 2:
@@ -18,8 +19,13 @@ except Exception as e:
     print(f"Failed to load JSON file: {e}")
     sys.exit(1)
 
-# Create a PDF report
-c = canvas.Canvas("caldera_report.pdf", pagesize=letter)
+# Get the operation name, sanitize it, and convert to lowercase
+operation_name = data['name'].replace(' ', '_').replace('/', '_').replace('\\', '_').lower()
+
+# Create a PDF report with the operation name and a formatted timestamp in the filename
+timestamp = datetime.now().strftime("%Y_%m_%d_%H%M%S")
+filename = f"{operation_name}_caldera_report_{timestamp}.pdf"
+c = canvas.Canvas(filename, pagesize=letter)
 width, height = letter  # Default letter size
 
 # Title
@@ -72,3 +78,4 @@ if y < 100:
 
 # Finalize the PDF
 c.save()
+print(f"Report generated: {filename}")
