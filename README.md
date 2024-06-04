@@ -17,8 +17,7 @@ This Python script allows users to convert JSON reports downloaded from Caldera 
 2. ### Install Dependencies  
     Install the required Python package ReportLab which is used for generating PDF files:  
     ```bash
-    git clone https://github.com/marksowell/caldera-report-generator.git
-    cd caldera-report-generator
+    pip install reportlab
     ```
 ## Usage
 To generate a PDF report from a Caldera JSON report:
@@ -28,10 +27,10 @@ To generate a PDF report from a Caldera JSON report:
     ```bash
     python generate_report.py /path/to/your/report.json
     ```
-    The script will generate a PDF file named caldera_report.pdf in the current directory.
+    The script will generate a uniquely named PDF file in the current directory, incorporating the operation's name with the report generation's date and time.
 
 ## Output
-The script outputs a PDF document titled `caldera_report.pdf` that includes:
+The script dynamically creates a PDF document with a filename in the format `operation_name_caldera_report_YYYY_MM_DD_HHMMSS.pdf`. Each report includes:
 - Host information such as hostname, username, and IP addresses.
 - Details of executed commands, their status, and timings.
 
